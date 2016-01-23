@@ -10,6 +10,7 @@ import com.ni.vision.NIVision.Image;
 import com.ni.vision.NIVision.ShapeMode;
 
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.*;
 import edu.wpi.first.wpilibj.command.Command;
@@ -30,8 +31,10 @@ public class Robot extends SampleRobot {
     Joystick rightStick = new Joystick(0); // set to ID 2 in DriverStation
     Button rightTrigger = new JoystickButton(rightStick, 1);
    
+    Compressor cmp1;
     
     TalonSRX rearLeft, rearRight, thrower, picker;
+    
     int session;
     Image frame;
     AxisCamera camera;
@@ -56,7 +59,8 @@ public class Robot extends SampleRobot {
         myRobot = new RobotDrive(rearLeft, rearRight); //PWM0=LEFT | PWM1=RIGHT
         myRobot.setExpiration(0.1);
         myRobot.setMaxOutput(.75);
-
+        cmp1 = new Compressor(0);
+        cmp1.setClosedLoopControl(true);
         
         // rearLeft.setBounds(0.75, 0.1, 0, -0.1, -0.75); // need to find updated call
         // rearRight.setBounds(0.75, 0.1, 0, -0.1, -0.75); // need to find updated call
