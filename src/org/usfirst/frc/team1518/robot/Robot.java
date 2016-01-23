@@ -33,11 +33,12 @@ import edu.wpi.first.wpilibj.TalonSRX;
  */
 public class Robot extends SampleRobot {
     RobotDrive myRobot;  // class that handles basic drive operations
-    Joystick leftStick;  // set to ID 1 in DriverStation
-    Button leftTrigger = new JoystickButton(leftStick, 0);
 
-    Joystick rightStick; // set to ID 2 in DriverStation
-    Button rightTrigger = new JoystickButton(rightStick, 0);
+    Joystick leftStick = new Joystick(1);  // set to ID 1 in DriverStation
+    Button leftTrigger = new JoystickButton(leftStick, 1);
+
+    Joystick rightStick = new Joystick(0); // set to ID 2 in DriverStation
+    Button rightTrigger = new JoystickButton(rightStick, 1);
    
     
     TalonSRX frontLeft, frontRight, rearLeft, rearRight;
@@ -70,8 +71,7 @@ public class Robot extends SampleRobot {
         // rearRight.setBounds(0.75, 0.1, 0, -0.1, -0.75); // need to find updated call
         // Will likely need to make adjustment in Joystick instead of PWM's
         
-        leftStick = new Joystick(0);
-        rightStick = new Joystick(1);
+
         frontLeft = new TalonSRX(2);
         //frontLeft.disable();
         frontRight = new TalonSRX(3);
@@ -93,7 +93,7 @@ public class Robot extends SampleRobot {
         while (isOperatorControl() && isEnabled()) {
         	myRobot.tankDrive(leftStick, rightStick);
             camera.getImage(frame);
-            NIVision.imaqDrawShapeOnImage(frame, frame, rect, DrawMode.DRAW_VALUE, ShapeMode.SHAPE_OVAL, 0.0f);
+            //NIVision.imaqDrawShapeOnImage(frame, frame, rect, DrawMode.DRAW_VALUE, ShapeMode.SHAPE_OVAL, 0.0f);
 
             CameraServer.getInstance().setImage(frame);
             
