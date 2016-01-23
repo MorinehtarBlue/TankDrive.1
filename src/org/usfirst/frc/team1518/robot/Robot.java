@@ -17,20 +17,10 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.vision.AxisCamera;
 import edu.wpi.first.wpilibj.TalonSRX;
 
-/**
- * This is a demo program showing the use of the RobotDrive class, specifically it 
- * contains the code necessary to operate a robot with tank drive.
- *
- * The VM is configured to automatically run this class, and to call the
- * functions corresponding to each mode, as described in the SampleRobot
- * documentation. If you change the name of this class or the package after
- * creating this project, you must also update the manifest file in the resource
- * directory.
- *
- * WARNING: While it may look like a good choice to use for your code if you're inexperienced,
- * don't. Unless you know what you are doing, complex code will be much more difficult under
- * this system. Use IterativeRobot or Command-Based instead if you're new.
- */
+/*  This is a test frame for the 2016 FRC - PalMac RaiderBots 1518
+ *  
+*/
+
 public class Robot extends SampleRobot {
     RobotDrive myRobot;  // class that handles basic drive operations
 
@@ -41,12 +31,13 @@ public class Robot extends SampleRobot {
     Button rightTrigger = new JoystickButton(rightStick, 1);
    
     
-    TalonSRX frontLeft, frontRight, rearLeft, rearRight;
+    TalonSRX rearLeft, rearRight, thrower, picker;
     int session;
     Image frame;
     AxisCamera camera;
     
-    Command leftAction;
+    Command grabBall;
+    Command shootBall;
     
     
     public void robotInit() {
@@ -72,9 +63,9 @@ public class Robot extends SampleRobot {
         // Will likely need to make adjustment in Joystick instead of PWM's
         
 
-        frontLeft = new TalonSRX(2);
+        picker = new TalonSRX(2);
         //frontLeft.disable();
-        frontRight = new TalonSRX(3);
+        thrower = new TalonSRX(3);
         //frontRight.disable();
         
     }
@@ -99,9 +90,13 @@ public class Robot extends SampleRobot {
             
             //look for trigger pull
             while (leftTrigger.get()) {
-            	frontLeft.set(.25);
+            	picker.set(-0.5);
             }
-            frontLeft.set(0.0);
+            picker.set(0.0);
+            while (rightTrigger.get()){
+            	thrower.set(1.0);
+            }
+            thrower.set(0.0);
             Timer.delay(0.005);		// wait for a motor update time
         }
     }
