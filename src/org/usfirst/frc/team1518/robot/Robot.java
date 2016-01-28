@@ -57,13 +57,12 @@ public class Robot extends SampleRobot {
 
     
     public Robot() {
-<<<<<<< HEAD
         myRobot = new RobotDrive(0, 1); // PWM0=LEFT | PWM1=RIGHT
-=======
+
         rearLeft = new TalonSRX(3); // Left hand driving motor
         rearRight = new TalonSRX(4); // Right hand drive motor
         myRobot = new RobotDrive(rearLeft, rearRight); //PWM0=LEFT | PWM1=RIGHT
->>>>>>> PowerLimits
+        
         myRobot.setExpiration(0.1);
         myRobot.setMaxOutput(.75);
         cmp1 = new Compressor(0);
